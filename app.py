@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify
 import requests
+from flask_cors import CORS  # <--- важно
 
 app = Flask(__name__)
+CORS(app)  # <--- разрешава всички origin по default
 
 @app.route("/api/virtual-board")
 def virtual_board():
     stop_code = request.args.get("stop_code")
-
     if not stop_code:
         return jsonify({"error": "stop_code is required"}), 400
 
